@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/folderIcon"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:tint="@color/colorPrimaryDark"
+            app:srcCompat="@drawable/folder_icon"
+            android:scaleType="centerInside"
+            android:scaleX="0.8"
+            android:scaleY="0.8"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/folderLinearLayout"
+            android:clickable="true"
+            android:background="@drawable/custom_ripple"
+            android:layout_toEndOf="@+id/folderIcon">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/space"/>
+            <TextView
+                    android:text="Название папки"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/folderName"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAlignment="textStart"
+                    android:textSize="18sp"
+                    android:layout_toEndOf="@+id/space"/>
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" app:srcCompat="@color/gray" android:id="@+id/grayLine"
+                    android:layout_alignBottom="@+id/folderName"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

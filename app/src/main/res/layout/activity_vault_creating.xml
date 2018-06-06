@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:minHeight="?attr/actionBarSize" android:id="@+id/creatingVaultToolbar"
+    />
+
+    <TextView
+            android:text="@string/creating_vault_hello_text"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content" android:id="@+id/createDatabaseHelloText"
+            android:layout_marginTop="23dp"
+            android:textAlignment="viewStart"
+            android:layout_below="@+id/creatingVaultToolbar"
+            android:layout_alignStart="@+id/vaultNameMaterialEditText"/>
+
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:clickable="true"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_tick"
+            android:id="@+id/createDatabaseFAButton"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp" android:visibility="invisible"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="300dp"
+            app:met_primaryColor="@color/floatingLabelColor"
+            app:met_helperText="@string/entering_vault_name_hint"
+            app:met_floatingLabelTextColor="@color/black"
+            app:met_maxCharacters="30"
+            android:layout_height="wrap_content"
+            android:hint="@string/vault_name"
+            android:layout_marginTop="9dp"
+            android:id="@+id/vaultNameMaterialEditText"
+            app:met_floatingLabelText="@string/vault_name"
+            android:layout_below="@+id/createDatabaseHelloText" android:layout_centerHorizontal="true"
+            android:inputType="textVisiblePassword"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+            app:met_floatingLabelText="@string/password"
+            app:met_primaryColor="@color/floatingLabelColor"
+            app:met_floatingLabelTextColor="@color/black"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:id="@+id/passwordMaterialEditText"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/vaultNameMaterialEditText"
+            android:layout_alignStart="@+id/vaultNameMaterialEditText" android:inputType="textPassword"/>
+
+</RelativeLayout>

@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">JustOneLock</string>
+
+    <string name="navigation_drawer_open">Открыть навигационную панель</string>
+    <string name="navigation_drawer_close">Закрыть навигационную панель</string>
+
+    <string name="action_settings">Настройки</string>
+    <string name="change_vault">Сменить хранилище</string>
+    <string name="export">Экспорт (в разработке)</string>
+    <string name="settings">Настройки (в разработке)</string>
+    <string name="tools">Инструменты (в разработке)</string>
+    <string name="TEMP_STRING_vault_name">Error! Can not load vault name</string>
+    <string name="ExitToast">Нажмите еще раз, чтобы выйти</string>
+    <string name="PermissionToWriteGranted">Разрешения получены</string>
+    <string name="WrongPassword">Неверный пароль</string>
+    <string name="HelloString">Приветствую, мастер!\n Введите свой мастер-ключ!</string>
+    <string name="Enter">Войти</string>
+    <string name="CorrectPassword">ʢ◉ᴥ◉ʡ</string>
+    <string name="create">Создать</string>
+    <string name="file_does_not_exist">Файла не существует</string>
+    <string name="folderName"> Название папки</string>
+    <string name="folder_creating">Создание папки</string>
+    <string name="remove">Удалить</string>
+    <string name="edit">Редактировать</string>
+    <string name="sort">Сортировка</string>
+    <string name="add_to_favorites_after_creating">Сразу добавить в избранное</string>
+    <string name="title">Название</string>
+    <string name="description">Описание</string>
+    <string name="password">Пароль</string>
+    <string name="create_entry">Новая запись</string>
+    <string name="create_note">Новая заметка</string>
+    <string name="create_folder">Новая папка</string>
+    <string name="login">Логин</string>
+    <string name="vault_name">Название хранилища</string>
+    <string name="hint">подсказка</string>
+    <string name="warning">Предупреждение</string>
+    <string name="creating_vault_hello_text">Если Вам нужно будет экспортировать хранилище, то оно будет находится в
+        папке JustOneLock Libraries во внутренней памяти в формате \".jol\".
+    </string>
+    <string name="entering_vault_name_hint">Допустимы буквы, цифры и символ \"_\"</string>
+    <string name="vault_creating">Создание хранилища</string>
+    <string name="just_one_lock">Just One Lock</string>
+    <string name="introduce">Простой и безопасный менеджер для паролей. \n Храните пароли надежно и огранизованно. \n А так же пишите заметки, \n которые хотите скрыть от чужих глаз.</string>
+    <string name="convenient">Удобный</string>
+    <string name="convenient_text">Just One Lock обладает простым \n и интуитивно понятным дизайном. \n Ничто не будет отвлекать Вас.
+    </string>
+    <string name="Start">Начать</string>
+    <string name="secure_hello_text">Just One Lock защитит \n Ваши данные от посторонних лиц.</string>
+    <string name="secure">Безопасный</string>
+    <string name="fast_hello_text">Just One Lock не заставит Вас ждать. \n Мы знаем, как важно Ваше время.</string>
+    <string name="fast">Быстрый</string>
+    <string name="open_existing">Открыть существующее \n хранилище</string>
+    <string name="create_new">Создать новое</string>
+    <string name="delete_password">Удалить запись?</string>
+    <string name="decline">Отмена</string>
+    <string name="ok">Ок</string>
+    <string name="delete_folder">Вы действительно хотите удалить эту папку? Вместе с ней удаляться и вложенные записи.</string>
+
+    <string name="text_for_empty_entries_screen">Записей пока нет. \n Создайте новую запись или папку, \n нажав на кнопку в правом нижнем углу! :) </string>
+    <string name="not_grouped">Несгруппированные</string>
+    <string name="folders">Папки</string>
+    <string name="note_text">Первая строка - заголовок,\nа остальные - текст</string>
+    <string name="notes_temp_text">Заметок пока нет. \n Создайте новую, нажав на кнопку \n в правом нижнем углу! :)</string>
+    <string name="in_favorites">В избранное</string>
+    <string name="passwordCopy">Пароль скопирован</string>
+    <string name="loginCopy">Логин скопирован</string>
+</resources>

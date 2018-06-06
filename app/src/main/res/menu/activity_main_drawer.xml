@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<item android:title="@string/tools">-->
+        <!--<menu>-->
+            <!--<group android:checkableBehavior="single">-->
+                <!--<item-->
+                        <!--android:id="@+id/nav_settings"-->
+                        <!--android:icon="@drawable/passwords_icon"-->
+                        <!--android:title="@string/settings"/>-->
+                <!--<item-->
+                        <!--android:id="@+id/nav_export"-->
+                        <!--android:icon="@drawable/passwords_icon"-->
+                        <!--android:title="@string/export"/>-->
+            <!--</group>-->
+        <!--</menu>-->
+    <!--</item>-->
+
+    <item
+            android:id="@+id/nav_change_vault"
+            android:icon="@drawable/passwords_icon"
+            android:title="@string/change_vault"/>
+
+</menu>
