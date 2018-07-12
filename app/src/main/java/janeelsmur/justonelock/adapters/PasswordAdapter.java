@@ -65,6 +65,7 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.MyView
         holder.titleTextView.setText(passwords.get(position).title);
         holder.login.setText(passwords.get(position).description);
         holder.passwordId = passwords.get(position).passwordId;
+        holder.title=passwords.get(position).title;
         holder.systemFolderName=passwords.get(position).systemFolderName;
 
     }
@@ -78,7 +79,7 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.MyView
 
         private TextView titleTextView, login;
         private int passwordId;
-        private String systemFolderName;
+        private String systemFolderName,title;
         private Toast copyToast;
         private RelativeLayout openPasswordActivityButton;
         private ImageView copyLoginButton;
