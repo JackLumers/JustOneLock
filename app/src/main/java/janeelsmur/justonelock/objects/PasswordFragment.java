@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import janeelsmur.justonelock.R;
 import janeelsmur.justonelock.dialogs.DeleteDialog;
 import janeelsmur.justonelock.utilites.DBTableHelper;
 import janeelsmur.justonelock.utilites.FileAlgorithms;
-import janeelsmur.justonelock.utilites.NotificationListener;
 
 public class PasswordFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener {
 
@@ -45,7 +43,6 @@ public class PasswordFragment extends Fragment implements View.OnClickListener, 
     private Toast copyToast;
 
     /**
-     * 
      * @param title - заголовок пароля
      * @param description - описание пароля
      * @param passwordIconResID - id иконки пароля

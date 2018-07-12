@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="478dp"
+        android:layout_marginTop="121dp"
+        android:text="Возможности приложения"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="262dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="182dp"
+        android:layout_marginTop="179dp"
+        android:text="Для того, чтобы создать пароль, папку или заметку нажмите на кнопку добавления"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="269dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textView14"
+        android:layout_marginTop="328dp"
+        android:text="Создавайте папки, для удобной сортировки паролей по категориям"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="268dp"
+        android:layout_height="45dp"
+        android:layout_alignEnd="@+id/imageView15"
+        android:layout_alignTop="@+id/textView12"
+        android:text="Есть возможность скопировать логин и пароль нажав на кнопки"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="123dp"
+        android:layout_height="97dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="290dp"
+        app:srcCompat="@drawable/info_create" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="83dp"
+        android:layout_height="36dp"
+        android:layout_alignBottom="@+id/textView12"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="106dp"
+        app:srcCompat="@drawable/info_login" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="299dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView16"
+        android:layout_alignStart="@+id/textView12"
+        android:text="Для того, чтобы сменить хранилище, на главном экране свайпните вправо и нажмите на кнопку"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="208dp"
+        android:layout_height="33dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView12"
+        android:layout_marginBottom="119dp"
+        app:srcCompat="@drawable/info_change" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="268dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView13"
+        android:layout_marginBottom="167dp"
+        android:text='Для того, чтобы удалить пароль, папку или заметку, зажмите нужный объект и нажмите "Да"'
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+</RelativeLayout>

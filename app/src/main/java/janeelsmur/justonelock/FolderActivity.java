@@ -1,17 +1,24 @@
 package janeelsmur.justonelock;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import janeelsmur.justonelock.adapters.FolderAdapter;
+import janeelsmur.justonelock.adapters.PasswordAdapter;
 import janeelsmur.justonelock.dialogs.DeleteDialog;
+import janeelsmur.justonelock.objects.Password;
 import janeelsmur.justonelock.utilites.DBTableHelper;
 import janeelsmur.justonelock.utilites.FileAlgorithms;
 import janeelsmur.justonelock.objects.PasswordFragment;
@@ -31,13 +38,17 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
     private int folderId;
     private byte[] key;
 
+    private RecyclerView recyclerViewpassword;
+    private PasswordAdapter Adapter;
+
     private SQLiteDatabase database;
-    private ArrayList<PasswordFragment> passwordFragments = new ArrayList<>();
+    private ArrayList<Password> passwordFragments = new ArrayList<>();
 
     private Menu globalMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_folder);
 
@@ -57,6 +68,11 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        recyclerViewpassword = findViewById(R.id.folder_recyclerview);
+        recyclerViewpassword.setLayoutManager(new LinearLayoutManager(this));
+        Adapter = new PasswordAdapter(passwordFragments, fullFilePath, key);
+        recyclerViewpassword.setAdapter(Adapter);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingActionButtonCreatePassword);
         fab.setOnClickListener(this);
     }
@@ -65,14 +81,18 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onStart() {
         super.onStart();
+        passwordFragments.clear();
         reloadPasswordsFromDatabase();
+        Adapter.notifyDataSetChanged();
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         globalMenu = menu;
-        menu.getItem(2).setVisible(true);
+        menu.getItem(2).setVisible(false);
         menu.getItem(3).setVisible(true);
         return true;
     }
@@ -85,7 +105,9 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case NotificationListener.DATA_CHANGED:
+                passwordFragments.clear();
                 reloadPasswordsFromDatabase();
+                Adapter.notifyDataSetChanged();;
                 break;
         }
     }
@@ -105,14 +127,10 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
         return super.onOptionsItemSelected(item);
     }
 
+
     private void reloadPasswordsFromDatabase() {
-            //Удаление всех фрагментов
-            for(int i = 0; i<passwordFragments.size(); i++){
-                getSupportFragmentManager().beginTransaction().remove(passwordFragments.get(i)).commit();
-            }
             //Обнуляем
             passwordFragments.clear();
-            int fragmentsCount = 0;
 
             database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
 
@@ -127,18 +145,14 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
                 String description = cursor.getString(cursor.getColumnIndex(DBTableHelper.PASS_DESCRIPTION));
                 int passwordId = cursor.getInt(cursor.getColumnIndex(DBTableHelper.KEY_ID));
 
-                passwordFragments.add(PasswordFragment.newInstance(title, description, 0, passwordId, fullFilePath, systemFolderName));
-                getSupportFragmentManager().beginTransaction().add(R.id.passwords_container, passwordFragments.get(fragmentsCount), "Password").commit();
-                fragmentsCount++;
+                passwordFragments.add(new Password(title, description, 0, passwordId, fullFilePath, systemFolderName));
                 while (cursor.moveToNext()) {
 
                     title = (FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key));
                     description = cursor.getString(cursor.getColumnIndex(DBTableHelper.PASS_DESCRIPTION));
                     passwordId = cursor.getInt(cursor.getColumnIndex(DBTableHelper.KEY_ID));
 
-                    passwordFragments.add(PasswordFragment.newInstance(title, description, 0, passwordId, fullFilePath, systemFolderName));
-                    getSupportFragmentManager().beginTransaction().add(R.id.passwords_container, passwordFragments.get(fragmentsCount), "Password").commit();
-                    fragmentsCount++;
+                    passwordFragments.add(new Password(title, description, 0, passwordId, fullFilePath, systemFolderName));
                 }
             }
 

@@ -17,7 +17,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         return pages[position];
     }
-
     @Override
     public int getCount() {
         return pages.length;

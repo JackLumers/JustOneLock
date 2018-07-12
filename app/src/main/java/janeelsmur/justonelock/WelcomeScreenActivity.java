@@ -1,6 +1,7 @@
 package janeelsmur.justonelock;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,7 @@ import janeelsmur.justonelock.welcomeScreens.WelcomeScreen1Fragment;
 import janeelsmur.justonelock.welcomeScreens.WelcomeScreen2Fragment;
 import janeelsmur.justonelock.welcomeScreens.WelcomeScreen3Fragment;
 import janeelsmur.justonelock.welcomeScreens.WelcomeScreen4Fragment;
+import janeelsmur.justonelock.welcomeScreens.WelcomeScreen5Fragment;
 
 public class WelcomeScreenActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -22,7 +24,8 @@ public class WelcomeScreenActivity extends AppCompatActivity implements View.OnC
     private final WelcomeScreen2Fragment screen2 = new WelcomeScreen2Fragment();
     private final WelcomeScreen3Fragment screen3 = new WelcomeScreen3Fragment();
     private final WelcomeScreen4Fragment screen4 = new WelcomeScreen4Fragment();
-    private final Fragment[] pages = {screen1, screen2, screen3, screen4};
+    private final WelcomeScreen5Fragment screen5 = new WelcomeScreen5Fragment();
+    private final Fragment[] pages = {screen1, screen2, screen3, screen4,screen5};
 
     private TextView startButton;
     private LinearLayout dotesLayout;
@@ -31,7 +34,6 @@ public class WelcomeScreenActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //*ЭКРАН ПРИВЕТСТВИЯ*//
         sharedPreferencesManager = new SharedPreferencesManager(this);
         if(!sharedPreferencesManager.isFirstAppLaunch()) { //Если это не первый запуск, переходим в MainActivity

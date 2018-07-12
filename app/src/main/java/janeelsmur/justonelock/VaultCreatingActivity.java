@@ -2,6 +2,7 @@ package janeelsmur.justonelock;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -38,6 +39,7 @@ public class VaultCreatingActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_vault_creating);
 
         //Тулбар

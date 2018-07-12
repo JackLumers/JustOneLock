@@ -1,6 +1,7 @@
 package janeelsmur.justonelock;
 
 import android.content.ContentValues;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class CreateFolderActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_folder_creating);
 

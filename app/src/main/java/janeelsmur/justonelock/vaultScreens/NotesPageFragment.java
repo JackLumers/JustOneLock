@@ -1,8 +1,10 @@
 package janeelsmur.justonelock.vaultScreens;
 
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.widget.RelativeLayout;
 import janeelsmur.justonelock.objects.Note;
@@ -28,16 +30,20 @@ public class NotesPageFragment extends Fragment {
     private RecyclerView recyclerView;
     private NoteAdapter mAdapter;
     private StaggeredGridLayoutManager gaggeredGridLayoutManager;
+    private static Bundle mBundleRecyclerViewState;
+    private final String KEY_RECYCLER_STATE="recycler_state";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page_notes, null);
-
+        setRetainInstance(true);
         fullFilePath = getActivity().getIntent().getExtras().getString("fullFilePath");
         key = getActivity().getIntent().getExtras().getByteArray("KEY");
 
@@ -46,7 +52,13 @@ public class NotesPageFragment extends Fragment {
         tempLayout = view.findViewById(R.id.notesTempLayout);
 
         mAdapter = new NoteAdapter(notes, fullFilePath, key);
-        gaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, 1);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            gaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, 1);
+        }
+        else {
+            gaggeredGridLayoutManager = new StaggeredGridLayoutManager(4, 1);
+        }
+
         recyclerView.setLayoutManager(gaggeredGridLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
@@ -55,6 +67,23 @@ public class NotesPageFragment extends Fragment {
     }
 
     @Override
+    public void onPause(){
+        super.onPause();
+        mBundleRecyclerViewState= new Bundle();
+        Parcelable listState = recyclerView.getLayoutManager().onSaveInstanceState();
+        mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(mBundleRecyclerViewState!=null){
+            Parcelable listState=mBundleRecyclerViewState.getParcelable(KEY_RECYCLER_STATE);
+            recyclerView.getLayoutManager().onRestoreInstanceState(listState);
+        }
+    }
+    @Override
+
     public void onStart() {
         super.onStart();
         try {

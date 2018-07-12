@@ -12,12 +12,12 @@
             android:roundIcon="@mipmap/icon"
             android:allowClearUserData="true"
             android:supportsRtl="true"
-            android:screenOrientation="portrait"
+            android:screenOrientation="nosensor"
             android:theme="@style/AppTheme">
 
         <!-- Активность экрана приветствия -->
         <activity android:name=".WelcomeScreenActivity"
-                    android:screenOrientation="portrait">
+                    android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -26,13 +26,13 @@
 
         <!-- Активность при создании новой папки -->
         <activity android:name=".CreateFolderActivity"
-                  android:screenOrientation="portrait"
+            android:screenOrientation="nosensor">
                   android:windowSoftInputMode="adjustResize">
         </activity>
 
         <!-- Активность при создании новой заметки -->
         <activity android:name=".NoteActivity"
-                  android:screenOrientation="portrait"
+            android:screenOrientation="nosensor">
                   android:windowSoftInputMode="adjustResize">
         </activity>
 
@@ -41,49 +41,49 @@
         <!-- Активность при создании нового пароля -->
         <activity
                 android:name=".CreatePasswordActivity"
-                android:screenOrientation="portrait"
+            android:screenOrientation="nosensor">
                 android:windowSoftInputMode="adjustResize">
         </activity>
 
         <!-- Активность хранилища -->
         <activity
                 android:name=".VaultActivity"
-                android:screenOrientation="portrait"
+            android:screenOrientation="nosensor">
                 android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
 
         <!-- Активность входа в хранилище -->
         <activity
                 android:name=".EnteringActivity"
-                android:screenOrientation="portrait"
+            android:screenOrientation="nosensor">
                 android:windowSoftInputMode="adjustResize">
         </activity>
 
         <!-- Активность при создании нового хранилища -->
         <activity
                 android:name=".VaultCreatingActivity"
-                android:screenOrientation="portrait"
+            android:screenOrientation="nosensor">
                 android:windowSoftInputMode="adjustResize">
         </activity>
 
         <!-- Активность папки -->
         <activity
                 android:name=".FolderActivity"
-                android:screenOrientation="portrait"
+            android:screenOrientation="nosensor">
                 android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
 
         <!-- Активность пароля -->
         <activity
                 android:name=".PasswordActivity"
-                android:screenOrientation="portrait"
+            android:screenOrientation="nosensor">
                 android:windowSoftInputMode="stateHidden">
         </activity>
 
         <!-- Главная активность выбора хранилища -->
         <activity
                 android:name=".MainActivity"
-                android:screenOrientation="portrait">
+            android:screenOrientation="nosensor">
         </activity>
 
     </application>

@@ -1,15 +1,19 @@
 package janeelsmur.justonelock;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,7 +37,6 @@ public class VaultActivity
     private String fileName;
 
     private DrawerLayout drawer;
-
     private FloatingActionButton fab;
     private FloatingActionButton createFolderFab;
     private FloatingActionButton createPasswordFab;
@@ -46,13 +49,15 @@ public class VaultActivity
     private Animation alphaScaleReversed;
 
     /* -------CONTENT_FRAGMENTS------- */
-    private final VaultViewPagerFragment vaultViewPagerFragment = new VaultViewPagerFragment();
+    private VaultViewPagerFragment vaultViewPagerFragment = new VaultViewPagerFragment();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vault);
+        Log.i("VaultActivity"," создалась заново");
 
         fileName = getIntent().getExtras().getString("fileName");
         fullFilePath = getIntent().getExtras().getString("fullFilePath");
@@ -82,19 +87,25 @@ public class VaultActivity
         setSupportActionBar(toolbar);
 
         //Инициализация и выставление навигационной панели
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(actionBarDrawerToggle);
-        drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                hideFabs();
-            }
-        });
-        actionBarDrawerToggle.syncState();
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(actionBarDrawerToggle);
+            drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+                @Override
+                public void onDrawerSlide(View drawerView, float slideOffset) {
+                    hideFabs();
+                }
+            });
+            actionBarDrawerToggle.syncState();
+        }
+
+
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         //Установка в тексте навигационной панели названия хранилища
         View navHeaderView = navigationView.inflateHeaderView(R.layout.nav_header_main);
@@ -206,9 +217,14 @@ public class VaultActivity
 //        } else if (id == R.id.nav_export) {
 //            //Открыть проводник для выбора пути сохранения хранилища
 //        }
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        }
+
+
+
         return true;
     }
 
@@ -226,7 +242,10 @@ public class VaultActivity
                 break;
 
             case NotificationListener.DATA_CHANGED:
+                Log.i("VaultActivyty","путь"+fullFilePath);
                 vaultViewPagerFragment.notifyDataHasChanged();
+
+
         }
     }
 

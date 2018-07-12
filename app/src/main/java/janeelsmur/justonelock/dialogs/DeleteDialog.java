@@ -95,6 +95,7 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
                 fullFilePath = getArguments().getString("fullFilePath");
                 systemFolderName = getArguments().getString("systemFolderName");
                 passwordId = getArguments().getInt("passwordId");
+                Log.i("DialogDelete","данные об удалении прошли "+fullFilePath);
                 break;
 
             case OBJECT_NOTE:
@@ -133,9 +134,11 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
                         SQLiteDatabase database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
                         DBTableHelper.markPasswordDeleted(database, systemFolderName, passwordId, 1);
                         database.close();
-                        if (isCalledFromActivity) notificationListener.onNotificationTaken(NotificationListener.FINISH);
-                        else notificationListener.onNotificationTaken(NotificationListener.DATA_CHANGED);
-                        dismiss();
+                        if (isCalledFromActivity) {notificationListener.onNotificationTaken(NotificationListener.FINISH);
+                        Log.i("DialogDelete","сработало если "+fullFilePath);}
+                        else {notificationListener.onNotificationTaken(NotificationListener.DATA_CHANGED);
+                            Log.i("DialogDelete","сработало иначе "+fullFilePath);
+                        dismiss();}
                     } else if (object == OBJECT_FOLDER) {
                         SQLiteDatabase database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
                         DBTableHelper.markFolderDeleted(database, folderId, 1);

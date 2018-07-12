@@ -1,6 +1,7 @@
 package janeelsmur.justonelock;
 
 import android.content.ContentValues;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 

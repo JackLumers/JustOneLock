@@ -2,6 +2,7 @@ package janeelsmur.justonelock;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Vibrator;
@@ -26,7 +27,7 @@ public class EnteringActivity extends AppCompatActivity implements View.OnClickL
     private byte[] key = new byte[64];
 
     private InputMethodManager keyboard;
-    private TextView enterButton;
+    private TextView enterButton, name_of_file;
     private TextView changeVaultButton;
     private EditText masterKey;
     private TextView onEnterText;
@@ -34,11 +35,13 @@ public class EnteringActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entering);
 
         keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         enterButton = (TextView) findViewById(R.id.enter_button);
+        name_of_file = (TextView) findViewById(R.id.name_of_file);
         changeVaultButton = (TextView) findViewById(R.id.change_vault_button);
         masterKey = (EditText) findViewById(R.id.master_key);
         onEnterText = (TextView) findViewById(R.id.onEnterText);
@@ -51,6 +54,7 @@ public class EnteringActivity extends AppCompatActivity implements View.OnClickL
         fileName = getIntent().getExtras().getString("fileName");
         SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(this);
         sharedPreferencesManager.setFilePath(fullFilePath);
+        name_of_file.setText("Название хранилища: " + fileName);
     }
 
     @Override

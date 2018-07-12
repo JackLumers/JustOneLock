@@ -7,20 +7,21 @@
         android:layout_height="match_parent"
         tools:context="janeelsmur.justonelock.EnteringActivity">
 
-        <TextView
+    <TextView
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/HelloString"
-                android:id="@+id/textView"
-                android:textSize="24sp"
-                android:visibility="visible"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimaryDark"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:layout_marginTop="63dp"
-                android:layout_below="@+id/blackDote" android:layout_centerHorizontal="true"/>
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="113dp"
+        android:text="@string/HelloString"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        android:visibility="visible" />
 
         <ImageView
                 android:layout_width="10dp"
@@ -106,5 +107,13 @@
                     android:layout_height="match_parent" app:srcCompat="@color/colorAccent"
                     android:id="@+id/imageView5"/>
         </LinearLayout>
+
+    <TextView
+        android:id="@+id/name_of_file"
+        android:layout_width="239dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:textSize="14sp" />
 
 </RelativeLayout>

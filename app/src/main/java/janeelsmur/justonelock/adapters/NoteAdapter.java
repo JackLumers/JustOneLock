@@ -75,7 +75,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
             intent.putExtra("KEY", key);
             intent.putExtra("fullFilePath", fullFilePath);
             intent.putExtra("noteId", noteId);
-            context.startActivity(intent);
+            v.getContext().startActivity(intent);
         }
 
         @Override

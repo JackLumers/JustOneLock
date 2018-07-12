@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -65,6 +66,7 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
 
@@ -195,6 +197,7 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
 
             //Вход в режим редактирования
             case R.id.action_edit:
+                titleInEditMode.setText(title);
                 setMode(EDITING_MODE);
                 break;
 
@@ -239,6 +242,7 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
         switch (mode) {
             case EDITING_MODE:
                 saveOldValues();
+                titleInEditMode.setText(title);
                 toolbar.setTitle("Редактирование");
                 globalMenu.getItem(2).setVisible(false);
                 globalMenu.getItem(3).setVisible(false);
