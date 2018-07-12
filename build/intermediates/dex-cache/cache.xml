@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\Ilnaz\Documents\GitHub\JustOneLock\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="c323c36ecc68965c4cfb460f7721113d2b61ed03">
-        <dex dex="C:\Users\Ilnaz\Documents\GitHub\JustOneLock\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_03b084aa3440bf189e7ba5bd3b1d0e2bcd24f8c3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\Ilnaz\Documents\GitHub\JustOneLock\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
         sha1="a5034ac0e44ae42624e9b8f7bfb8a969eee4126b">
         <dex dex="C:\Users\Ilnaz\Documents\GitHub\JustOneLock\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_adfc2f6a6f0ce6254aa81f419869d6ab59bfeb94\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ilnaz\Documents\GitHub\JustOneLock\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="c323c36ecc68965c4cfb460f7721113d2b61ed03">
+        <dex dex="C:\Users\Ilnaz\Documents\GitHub\JustOneLock\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_03b084aa3440bf189e7ba5bd3b1d0e2bcd24f8c3\classes.dex" />
     </item>
 
 </items>
