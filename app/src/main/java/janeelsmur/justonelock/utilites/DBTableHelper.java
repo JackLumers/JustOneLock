@@ -3,6 +3,19 @@ package janeelsmur.justonelock.utilites;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
+
+// TODO При добавлении новых таблиц/полей и пр. нужно будет прописать гибкий алгоритм обновления БД пользователя.
+
+/**
+ *
+ * Класс-помощник для создания базы данных и изменения значений в ней.
+ * Изменения констант недопустимы.
+ *
+ * При добавлении новых таблиц/полей и пр. нужно будет прописать
+ * гибкий алгоритм обновления БД пользователя.
+ *
+ */
+
 public class DBTableHelper {
 
     private static final String LOG_TAG = "DBTableHelper";

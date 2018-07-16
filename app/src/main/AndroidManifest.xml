@@ -30,13 +30,11 @@
             android:windowSoftInputMode="adjustResize">
         </activity>
 
-        <!-- Активность при создании новой заметки -->
+        <!-- Активность при создании новой и редактировании заметки -->
         <activity android:name=".NoteActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustResize">
         </activity>
-
-        <!-- Активность при редактировании заметки -->
 
         <!-- Активность при создании нового пароля -->
         <activity

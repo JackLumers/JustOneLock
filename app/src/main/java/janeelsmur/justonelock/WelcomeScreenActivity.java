@@ -25,7 +25,7 @@ public class WelcomeScreenActivity extends AppCompatActivity implements View.OnC
     private final WelcomeScreen3Fragment screen3 = new WelcomeScreen3Fragment();
     private final WelcomeScreen4Fragment screen4 = new WelcomeScreen4Fragment();
     private final WelcomeScreen5Fragment screen5 = new WelcomeScreen5Fragment();
-    private final Fragment[] pages = {screen1, screen2, screen3, screen4,screen5};
+    private final Fragment[] pages = {screen1, screen2, screen3, screen4, screen5};
 
     private TextView startButton;
     private LinearLayout dotesLayout;

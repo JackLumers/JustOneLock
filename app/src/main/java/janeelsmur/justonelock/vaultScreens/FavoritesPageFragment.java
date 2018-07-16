@@ -1,10 +1,8 @@
 package janeelsmur.justonelock.vaultScreens;
 
-import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,19 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import janeelsmur.justonelock.R;
-import janeelsmur.justonelock.adapters.FolderAdapter;
 import janeelsmur.justonelock.adapters.PasswordAdapter;
 import janeelsmur.justonelock.objects.Password;
 import janeelsmur.justonelock.utilites.DBTableHelper;
 import janeelsmur.justonelock.utilites.FileAlgorithms;
-import janeelsmur.justonelock.objects.PasswordFragment;
 
 import java.util.ArrayList;
 import java.util.Vector;
-import java.util.zip.Inflater;
 
 public class FavoritesPageFragment extends Fragment {
 
@@ -35,79 +29,71 @@ public class FavoritesPageFragment extends Fragment {
     private byte[] key;
 
     private SQLiteDatabase database;
-    private PasswordAdapter Adapter, mAdapter;
+    private PasswordAdapter passwordsAdapter, passwordsInFoldersAdapter;
     //Для обновления фрагментов
     private ArrayList<Password> passwordsInFolder = new ArrayList<>();
     private ArrayList<Password> passwordsWithoutFolder = new ArrayList<>();
-    private RecyclerView recyclerViewpass,recyclerviewpassinFolder;
+    private RecyclerView passwordsRecycleView, passwordsInFolderRecycleView;
     //Заглушка
     private RelativeLayout tempRelativeLayout;
-    private Inflater inflater;
-    private Parcelable listState;
-    private final String KEY_RECYCLER_STATE="recycler_state";
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable  Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_page_favorites, null);
         setRetainInstance(false);
         passwordsInFolder.toArray();
 
-        tempRelativeLayout = view.findViewById(R.id.tempFavoritesRelativeLayout);
-        recyclerViewpass= view.findViewById(R.id.recyclerview_favourites);
-        recyclerviewpassinFolder =view.findViewById(R.id.recyclerview_favourites_inFolder);
         /* СОХРАНЕННЫЕ ДАННЫЕ */
         fullFilePath = getActivity().getIntent().getExtras().getString("fullFilePath");
         key = getActivity().getIntent().getExtras().getByteArray("KEY");
-        recyclerViewpass.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerviewpassinFolder.setLayoutManager(new LinearLayoutManager(getContext()));
-        Adapter = new PasswordAdapter(passwordsWithoutFolder, fullFilePath, key);
-        mAdapter = new PasswordAdapter(passwordsInFolder, fullFilePath, key);
 
-        Log.w("FavoritesPage", "onStart: onCreateView сработал " );
-        recyclerViewpass.setAdapter(Adapter);
-        recyclerviewpassinFolder.setAdapter(mAdapter);
+        tempRelativeLayout = view.findViewById(R.id.tempFavoritesRelativeLayout);
+        passwordsRecycleView = view.findViewById(R.id.recyclerview_favourites);
+        passwordsInFolderRecycleView = view.findViewById(R.id.recyclerview_favourites_inFolder);
+
+        passwordsRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+        passwordsInFolderRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+        passwordsAdapter = new PasswordAdapter(passwordsWithoutFolder, fullFilePath, key);
+        passwordsInFoldersAdapter = new PasswordAdapter(passwordsInFolder, fullFilePath, key);
+
+        Log.w("FavoritesPage", "onStart: onCreateView сработал ");
+        passwordsRecycleView.setAdapter(passwordsAdapter);
+        passwordsInFolderRecycleView.setAdapter(passwordsInFoldersAdapter);
 
 
         return view;
     }
 
 
-
     @Override
     public void onStart() {
-
-
-
         //Загрузка избранных паролей
-
-
         try {
             passwordsInFolder.clear();
             passwordsWithoutFolder.clear();
             loadFavoritesPasswords();
             loadFavoritePasswordsFromFolders();
-            Adapter.notifyDataSetChanged();
-            mAdapter.notifyDataSetChanged();
-            notifyDataHasChanged();
+            passwordsAdapter.notifyDataSetChanged();
+            passwordsInFoldersAdapter.notifyDataSetChanged();
         } catch (Exception e) {
             Log.w("FavoritesPage", "onStart: " + e.getLocalizedMessage());
         }
 
         //Ставим или убираем заглушку
-        if (passwordsInFolder.size()==0 && passwordsWithoutFolder.size()==0) tempRelativeLayout.setVisibility(View.VISIBLE);
-            else tempRelativeLayout.setVisibility(View.GONE);
+        if (passwordsInFolder.size() == 0 && passwordsWithoutFolder.size() == 0)
+            tempRelativeLayout.setVisibility(View.VISIBLE);
+        else tempRelativeLayout.setVisibility(View.GONE);
 
         super.onStart();
     }
 
 
-    private void loadFavoritesPasswords(){
-        int fragmentsCount = 0;
+    private void loadFavoritesPasswords() {
 
         String whereClause = "isFavorite = ? AND isRemoved = ?";
-        String[] whereArgs = new String[] {"1", "0"};
+        String[] whereArgs = new String[]{"1", "0"};
 
         database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
         Cursor cursor = database.query(DBTableHelper.TABLE_PASSWORDS_WITHOUT_FOLDER, null, whereClause, whereArgs, null, null, null);
@@ -134,29 +120,27 @@ public class FavoritesPageFragment extends Fragment {
         database.close();
     }
 
-    private void loadFavoritePasswordsFromFolders(){
-        int fragmentsCount = 0;
-
+    private void loadFavoritePasswordsFromFolders() {
         database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
 
         //Получаем массив с id всех папок
         String whereClause = "isRemoved = ?";
-        String[] whereArgs = new String[] {"0"};
+        String[] whereArgs = new String[]{"0"};
         Cursor cursor = database.query(DBTableHelper.FOLDER_INDEXER_TABLE, null, whereClause, whereArgs, null, null, null);
         Vector<Integer> folderIndexes = new Vector<>();
         folderIndexes.toArray();
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             folderIndexes.add(cursor.getInt(cursor.getColumnIndex(DBTableHelper.KEY_ID)));
-            while (cursor.moveToNext()){
+            while (cursor.moveToNext()) {
                 folderIndexes.add(cursor.getInt(cursor.getColumnIndex(DBTableHelper.KEY_ID)));
             }
         }
 
         whereClause = "isFavorite = ? AND isRemoved = ?";
-        whereArgs = new String[] {"1", "0"};
+        whereArgs = new String[]{"1", "0"};
         String systemFolderNamePrefix = DBTableHelper.SYSTEM_FOLDER_NAME_PREFIX;
 
-        for(int i = 0; i<folderIndexes.size(); i++) { //Перебираем папки, пока не дойдем до конца массива
+        for (int i = 0; i < folderIndexes.size(); i++) { //Перебираем папки, пока не дойдем до конца массива
             int folderIndex = folderIndexes.get(i); //Индекс папки
             String systemFolderName = systemFolderNamePrefix + folderIndex;
             cursor = database.query(systemFolderName, null, whereClause, whereArgs, null, null, null);
@@ -184,7 +168,9 @@ public class FavoritesPageFragment extends Fragment {
         database.close();
     }
 
-    /** Уведомляет фрагмент о том, что данные в нём изменились */
+    /**
+     * Уведомляет фрагмент о том, что данные в нём изменились
+     */
     public void notifyDataHasChanged() {
         try {
             //Загрузка избранных паролей
@@ -192,15 +178,16 @@ public class FavoritesPageFragment extends Fragment {
             passwordsWithoutFolder.clear();
             loadFavoritesPasswords();
             loadFavoritePasswordsFromFolders();
-            Adapter.notifyDataSetChanged();
-            mAdapter.notifyDataSetChanged();
-
-            //Ставим или убираем заглушку
-            if (passwordsInFolder.size() == 0 && passwordsWithoutFolder.size() == 0)
-                tempRelativeLayout.setVisibility(View.VISIBLE);
-            else tempRelativeLayout.setVisibility(View.GONE);
-        } catch (Exception e){
+            passwordsAdapter.notifyDataSetChanged();
+            passwordsInFoldersAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
             Log.i("FavouritesPage", "Обновить фрагменты пока невозможно, так как вьюшка сохранила своё состояние и заморозилась.");
         }
+
+        //Ставим или убираем заглушку
+        if (passwordsInFolder.size() == 0 && passwordsWithoutFolder.size() == 0)
+            tempRelativeLayout.setVisibility(View.VISIBLE);
+        else tempRelativeLayout.setVisibility(View.GONE);
+
     }
 }

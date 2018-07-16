@@ -75,11 +75,9 @@ public class VaultViewPagerFragment extends Fragment {
 
     /** Уведомляет все фрагменты, что данные устарели и их нужно обновить */
     public void notifyDataHasChanged(){
-
             favoritesPageFragment.notifyDataHasChanged();
             passwordsPageFragment.notifyDataHasChanged();
             notesPageFragment.notifyDataHasChanged();
-
     }
 
 }

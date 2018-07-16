@@ -1,6 +1,5 @@
 package janeelsmur.justonelock.utilites;
 
-import android.util.Base64;
 import android.util.Log;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -13,7 +12,15 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
+
+/**
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *
+ * ЭТО КЛАСС С АЛГОРИТМАМИ ШИФРОВАНИЯ.
+ * ВСЕ ИЗМЕНЕНИЯ В СИСИТЕМЕ ШИФРОВАНИЯ ДОЛЖНЫ БЫТЬ ПОДДТВЕРЖДЕНЫ ГЛАВНЫМ РАЗРАБОТЧИКОМ.
+ *
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ **/
 
 public class FileAlgorithms {
 

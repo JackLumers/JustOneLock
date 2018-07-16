@@ -242,9 +242,8 @@ public class VaultActivity
                 break;
 
             case NotificationListener.DATA_CHANGED:
-                Log.i("VaultActivyty","путь"+fullFilePath);
                 vaultViewPagerFragment.notifyDataHasChanged();
-
+                break;
 
         }
     }
