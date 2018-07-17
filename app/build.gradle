@@ -1,16 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+    }
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
-        applicationId "janeelsmur.justonelock"
+        applicationId 'JackLumers.JustOneLock'
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName '0.9'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionNameSuffix 'stable'
     }
     buildTypes {
         release {

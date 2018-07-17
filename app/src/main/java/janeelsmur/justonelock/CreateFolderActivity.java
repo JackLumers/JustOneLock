@@ -114,4 +114,10 @@ public class CreateFolderActivity extends AppCompatActivity implements View.OnCl
             cursor.close();
         }
     }
+
+    @Override
+    public void onLowMemory() {
+        onDestroy();
+        super.onLowMemory();
+    }
 }

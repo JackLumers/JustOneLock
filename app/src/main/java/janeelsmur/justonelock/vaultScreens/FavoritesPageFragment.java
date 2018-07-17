@@ -40,14 +40,18 @@ public class FavoritesPageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_page_favorites, null);
-        setRetainInstance(false);
         passwordsInFolder.toArray();
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         /* СОХРАНЕННЫЕ ДАННЫЕ */
-        fullFilePath = getActivity().getIntent().getExtras().getString("fullFilePath");
-        key = getActivity().getIntent().getExtras().getByteArray("KEY");
+        fullFilePath = getActivity().getIntent().getStringExtra("fullFilePath");
+        key = getActivity().getIntent().getByteArrayExtra("KEY");
 
         tempRelativeLayout = view.findViewById(R.id.tempFavoritesRelativeLayout);
         passwordsRecycleView = view.findViewById(R.id.recyclerview_favourites);
@@ -61,11 +65,7 @@ public class FavoritesPageFragment extends Fragment {
         Log.w("FavoritesPage", "onStart: onCreateView сработал ");
         passwordsRecycleView.setAdapter(passwordsAdapter);
         passwordsInFolderRecycleView.setAdapter(passwordsInFoldersAdapter);
-
-
-        return view;
     }
-
 
     @Override
     public void onStart() {
@@ -78,7 +78,7 @@ public class FavoritesPageFragment extends Fragment {
             passwordsAdapter.notifyDataSetChanged();
             passwordsInFoldersAdapter.notifyDataSetChanged();
         } catch (Exception e) {
-            Log.w("FavoritesPage", "onStart: " + e.getLocalizedMessage());
+            Log.w("FavoritesPage", "onStart: " + Log.getStackTraceString(e));
         }
 
         //Ставим или убираем заглушку
@@ -181,7 +181,7 @@ public class FavoritesPageFragment extends Fragment {
             passwordsAdapter.notifyDataSetChanged();
             passwordsInFoldersAdapter.notifyDataSetChanged();
         } catch (Exception e) {
-            Log.i("FavouritesPage", "Обновить фрагменты пока невозможно, так как вьюшка сохранила своё состояние и заморозилась.");
+            Log.i("FavouritesPage", Log.getStackTraceString(e));
         }
 
         //Ставим или убираем заглушку

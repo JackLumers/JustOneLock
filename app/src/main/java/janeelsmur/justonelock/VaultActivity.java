@@ -49,7 +49,7 @@ public class VaultActivity
     private Animation alphaScaleReversed;
 
     /* -------CONTENT_FRAGMENTS------- */
-    private VaultViewPagerFragment vaultViewPagerFragment = new VaultViewPagerFragment();
+    private VaultViewPagerFragment vaultViewPagerFragment;
 
 
     @Override
@@ -58,6 +58,8 @@ public class VaultActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vault);
         Log.i("VaultActivity"," создалась заново");
+
+        vaultViewPagerFragment = new VaultViewPagerFragment();
 
         fileName = getIntent().getExtras().getString("fileName");
         fullFilePath = getIntent().getExtras().getString("fullFilePath");
@@ -111,6 +113,8 @@ public class VaultActivity
         View navHeaderView = navigationView.inflateHeaderView(R.layout.nav_header_main);
         TextView navHeaderText = navHeaderView.findViewById(R.id.nav_header_main_text);
         navHeaderText.setText(fileName);
+
+        Log.d("!!!!!!!!!!!!!!!!!!!!!", "onCreate: ");
     }
 
     @Override
@@ -270,5 +274,11 @@ public class VaultActivity
         createFolderFab.show(); createNoteFab.show(); createPasswordFab.show();
         createFolderTextView.setVisibility(View.VISIBLE); createPasswordTextView.setVisibility(View.VISIBLE); createNoteTextView.setVisibility(View.VISIBLE);
         createFolderTextView.startAnimation(alphaScale); createPasswordTextView.startAnimation(alphaScale); createNoteTextView.startAnimation(alphaScale);
+    }
+
+    @Override
+    public void onLowMemory() {
+        onDestroy();
+        super.onLowMemory();
     }
 }

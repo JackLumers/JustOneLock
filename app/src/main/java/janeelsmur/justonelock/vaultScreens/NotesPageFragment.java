@@ -34,16 +34,8 @@ public class NotesPageFragment extends Fragment {
     private final String KEY_RECYCLER_STATE="recycler_state";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page_notes, null);
-        setRetainInstance(true);
         fullFilePath = getActivity().getIntent().getExtras().getString("fullFilePath");
         key = getActivity().getIntent().getExtras().getByteArray("KEY");
 
@@ -69,7 +61,7 @@ public class NotesPageFragment extends Fragment {
     @Override
     public void onPause(){
         super.onPause();
-        mBundleRecyclerViewState= new Bundle();
+        mBundleRecyclerViewState = new Bundle();
         Parcelable listState = recyclerView.getLayoutManager().onSaveInstanceState();
         mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
     }
@@ -86,6 +78,8 @@ public class NotesPageFragment extends Fragment {
 
     public void onStart() {
         super.onStart();
+
+
         try {
             notes.clear();
             loadNotesFromDatabase();
@@ -94,9 +88,23 @@ public class NotesPageFragment extends Fragment {
             Log.w("NotesPage", "onStart: " + e.getLocalizedMessage());
         }
 
+
         //Ставим или убираем заглушку
         if (notes.size() != 0) tempLayout.setVisibility(View.GONE);
         else tempLayout.setVisibility(View.VISIBLE);
+    }
+
+    /** ВРЕМЕННОЕ РЕШЕНИЕ. При повороте активность не пересоздается, а вызывается этот метод.
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            gaggeredGridLayoutManager.setSpanCount(2);
+        }
+        else {
+            gaggeredGridLayoutManager.setSpanCount(4);
+        }
     }
 
     /**
@@ -184,5 +192,6 @@ public class NotesPageFragment extends Fragment {
             database.close();
         }
     }
+
 }
 

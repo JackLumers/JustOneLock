@@ -168,4 +168,10 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
                 break;
         }
     }
+
+    @Override
+    public void onLowMemory() {
+        onDestroy();
+        super.onLowMemory();
+    }
 }

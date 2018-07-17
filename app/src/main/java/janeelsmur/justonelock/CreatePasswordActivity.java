@@ -148,4 +148,10 @@ public class CreatePasswordActivity extends AppCompatActivity implements View.On
         DBTableHelper.createPassword(database, cv);
         database.close();
     }
+
+    @Override
+    public void onLowMemory() {
+        onDestroy();
+        super.onLowMemory();
+    }
 }

@@ -3,92 +3,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Возможности приложения"
-        android:textColor="@color/black"
-        android:textSize="24sp" />
+    <RelativeLayout
+            android:id="@+id/information"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="262dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView15"
-        android:layout_alignStart="@+id/textView15"
-        android:text="Для того, чтобы создать пароль, папку или заметку нажмите на кнопку добавления"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
+        <TextView
+                android:id="@+id/textView12"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/create_tip"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_alignParentStart="true"/>
+        <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_plus"
+                android:id="@+id/floatingActionButton3"
+                app:fabSize="mini"
+                android:layout_marginStart="25dp"
+                android:layout_alignTop="@id/textView12"
+                android:layout_toEndOf="@+id/textView12"/>
+        <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/textView13"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/sort_tip"
+                android:textColor="@color/black"
+                android:textSize="14sp" android:layout_below="@+id/textView12"
+                android:layout_alignStart="@+id/textView12"/>
+
+        <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:tint="@color/white"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/folder_icon"
+                android:id="@+id/floatingActionButton4"
+                app:fabSize="mini"
+                android:layout_alignTop="@+id/textView13" android:layout_alignStart="@+id/floatingActionButton3"/>
+
+        <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/textView14"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/copy_tip"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_below="@+id/textView13" android:layout_alignStart="@+id/textView13"/>
+        <LinearLayout
+                android:layout_alignTop="@+id/textView14" android:layout_alignStart="@+id/floatingActionButton3"
+                android:orientation="horizontal"
+                android:layout_width="80dp"
+                android:layout_height="40dp" android:id="@+id/linearLayout4">
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" app:srcCompat="@drawable/ic_login"
+                    android:id="@+id/imageView18"
+                    android:layout_weight="1"/>
+            <ImageView
+                    android:scaleY="0.8"
+                    android:scaleX="0.8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" app:srcCompat="@drawable/ic_key" android:id="@+id/imageView19"
+                    android:layout_weight="1"/>
+        </LinearLayout>
+        <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/textView16"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_tip"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_below="@+id/textView14" android:layout_alignStart="@+id/textView14"/>
+    </RelativeLayout>
 
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="269dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:text="Создавайте папки, для удобной сортировки паролей по категориям"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="268dp"
-        android:layout_height="45dp"
-        android:layout_alignBottom="@+id/textView12"
-        android:layout_alignParentEnd="true"
-        android:text="Есть возможность скопировать логин и пароль нажав на кнопки"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="123dp"
-        android:layout_height="97dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView12"
-        app:srcCompat="@drawable/info_create" />
-
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="82dp"
-        android:layout_height="27dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="74dp"
-        app:srcCompat="@drawable/info_login" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="299dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView16"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="13dp"
-        android:text="Для того, чтобы сменить хранилище, на главном экране свайпните вправо и нажмите на кнопку"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
-
-    <ImageView
-        android:id="@+id/imageView16"
-        android:layout_width="208dp"
-        android:layout_height="33dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="14dp"
-        android:layout_marginStart="16dp"
-        app:srcCompat="@drawable/info_change" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="268dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/textView15"
-        android:text='Для того, чтобы удалить пароль, папку или заметку, зажмите нужный объект и нажмите "Да"'
-        android:textColor="@color/black"
-        android:textSize="14sp" />
 </RelativeLayout>

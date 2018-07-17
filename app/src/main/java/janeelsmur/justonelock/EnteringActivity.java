@@ -75,7 +75,7 @@ public class EnteringActivity extends AppCompatActivity implements View.OnClickL
                     keyboard.hideSoftInputFromWindow(enterButton.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS); //Убираем клавиатуру
 
                     masterKey.setText("");
-                    masterKey.setVisibility(100);
+                    masterKey.setVisibility(View.VISIBLE);
 
                     blackDote.startAnimation((AnimationUtils.loadAnimation(this, R.anim.opening)));
 
@@ -94,10 +94,10 @@ public class EnteringActivity extends AppCompatActivity implements View.OnClickL
                     masterKey.setText("");
                     onEnterText.setText(R.string.WrongPassword);
                     onEnterText.setTextColor(getResources().getColor(R.color.lightRed));
-                    onEnterText.setVisibility(0);
+                    onEnterText.setVisibility(View.VISIBLE);
                     onEnterText.startAnimation(AnimationUtils.loadAnimation(this, R.anim.alpha));
                     blackDote.startAnimation((AnimationUtils.loadAnimation(this, R.anim.triggering)));
-                    onEnterText.setVisibility(100);
+                    onEnterText.setVisibility(View.INVISIBLE);
                 }
                 break;
 

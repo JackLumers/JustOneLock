@@ -64,4 +64,13 @@
     <string name="in_favorites">В избранное</string>
     <string name="passwordCopy">Пароль скопирован</string>
     <string name="loginCopy">Логин скопирован</string>
+    <string name="change_vault_tip">Для того, чтобы сменить хранилище, свайпните вправо от края экрана и нажмите на
+        смену хранилища.
+    </string>
+    <string name="delete_tip">Для того, чтобы удалить пароль, папку или заметку, зажмите нужный объект и нажмите \"Да\".
+    </string>
+    <string name="copy_tip">Есть возможность скопировать логин и пароль, нажав на кнопки.</string>
+    <string name="sort_tip">Создавайте папки для удобной сортировки паролей по категориям.</string>
+    <string name="create_tip">Для того, чтобы создать пароль, папку или заметку, нажмите на кнопку добавления.</string>
+    <string name="possybilities_tip">Возможности приложения</string>
 </resources>

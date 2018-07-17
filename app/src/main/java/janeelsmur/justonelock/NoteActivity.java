@@ -154,4 +154,10 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onLowMemory() {
+        onDestroy();
+        super.onLowMemory();
+    }
 }
