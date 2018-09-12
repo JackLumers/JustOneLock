@@ -51,7 +51,7 @@ public class PasswordsPageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_page_passwords, null);
 
         // СОХРАНЕННЫЕ ДАННЫЕ //
-        fullFilePath = getActivity().getIntent().getExtras().getString("fullFilePath");
+        fullFilePath = getActivity().getIntent().getStringExtra("fullFilePath");
         key = getActivity().getIntent().getByteArrayExtra("KEY");
 
         folderFragments.toArray();
@@ -69,6 +69,7 @@ public class PasswordsPageFragment extends Fragment {
         Adapter = new FolderAdapter(folderFragments, fullFilePath, key);
         recyclerViewfolder.setAdapter(Adapter);
 
+        Log.d("PasswordsPage", "onCreateView!" + fullFilePath);
         return view;
     }
 

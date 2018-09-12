@@ -1,7 +1,6 @@
 package janeelsmur.justonelock;
 
 import android.content.Context;
-import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -31,10 +30,8 @@ public class VaultViewPagerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.vault_view_pager, null);
-        setRetainInstance(false);
         //Инициализация интерфейса
         notificationListener = (NotificationListener) getActivity();
-        Log.i("VaultViewActivity"," создалась заново");
         //Инициализация PagerAdapter'а
         PagerAdapter pagerAdapter = new PagerAdapter(getChildFragmentManager(), pages);
         ViewPager viewPager = view.findViewById(R.id.viewpager);
@@ -70,6 +67,7 @@ public class VaultViewPagerFragment extends Fragment {
             }
         });
 
+        Log.d("VaultViewPagerFragments", "onCreateView: !");
         return view;
     }
 

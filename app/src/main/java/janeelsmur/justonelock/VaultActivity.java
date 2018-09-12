@@ -49,21 +49,20 @@ public class VaultActivity
     private Animation alphaScaleReversed;
 
     /* -------CONTENT_FRAGMENTS------- */
-    private VaultViewPagerFragment vaultViewPagerFragment;
+    private final VaultViewPagerFragment vaultViewPagerFragment = new VaultViewPagerFragment();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vault);
-        Log.i("VaultActivity"," создалась заново");
 
-        vaultViewPagerFragment = new VaultViewPagerFragment();
+        //Добавляет фрагмент с viewPager'ом
+        setViewPagerContent();
 
-        fileName = getIntent().getExtras().getString("fileName");
-        fullFilePath = getIntent().getExtras().getString("fullFilePath");
-        key = getIntent().getExtras().getByteArray("KEY");
+        fileName = getIntent().getStringExtra("fileName");
+        fullFilePath = getIntent().getStringExtra("fullFilePath");
+        key = getIntent().getByteArrayExtra("KEY");
 
         //-----------------
         alphaScale = AnimationUtils.loadAnimation(this, R.anim.alpha_scale);
@@ -104,7 +103,6 @@ public class VaultActivity
         }
 
 
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -114,7 +112,7 @@ public class VaultActivity
         TextView navHeaderText = navHeaderView.findViewById(R.id.nav_header_main_text);
         navHeaderText.setText(fileName);
 
-        Log.d("!!!!!!!!!!!!!!!!!!!!!", "onCreate: ");
+        Log.d("VaultActivity", "onCreate!" + fullFilePath);
     }
 
     @Override
@@ -129,9 +127,6 @@ public class VaultActivity
         createNoteTextView.setOnClickListener(this);
         createPasswordTextView.setOnClickListener(this);
         createFolderTextView.setOnClickListener(this);
-
-        if(getSupportFragmentManager().findFragmentById(R.id.main_pages_container)==null)
-            setViewPagerContent();
     }
 
     @Override
@@ -255,7 +250,7 @@ public class VaultActivity
     private void setViewPagerContent(){
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.main_pages_container, vaultViewPagerFragment)
+                .add(R.id.main_pages_container, vaultViewPagerFragment)
                 .commit();
     }
 
@@ -274,11 +269,5 @@ public class VaultActivity
         createFolderFab.show(); createNoteFab.show(); createPasswordFab.show();
         createFolderTextView.setVisibility(View.VISIBLE); createPasswordTextView.setVisibility(View.VISIBLE); createNoteTextView.setVisibility(View.VISIBLE);
         createFolderTextView.startAnimation(alphaScale); createPasswordTextView.startAnimation(alphaScale); createNoteTextView.startAnimation(alphaScale);
-    }
-
-    @Override
-    public void onLowMemory() {
-        onDestroy();
-        super.onLowMemory();
     }
 }
