@@ -40,7 +40,7 @@
     <string name="entering_vault_name_hint">Допустимы буквы, цифры и символ \"_\"</string>
     <string name="vault_creating">Создание хранилища</string>
     <string name="just_one_lock">Just One Lock</string>
-    <string name="introduce">Простой и безопасный менеджер для паролей. \n Храните пароли надежно и огранизованно. \n А так же пишите заметки, \n которые хотите скрыть от чужих глаз.</string>
+    <string name="introduce">Простой и безопасный менеджер для паролей. \n Храните пароли надежно и организованно. \n А так же пишите заметки, \n которые хотите скрыть от чужих глаз.</string>
     <string name="convenient">Удобный</string>
     <string name="convenient_text">Just One Lock обладает простым \n и интуитивно понятным дизайном. \n Ничто не будет отвлекать Вас.
     </string>

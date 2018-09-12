@@ -36,8 +36,8 @@ public class NotesPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page_notes, null);
-        fullFilePath = getActivity().getIntent().getExtras().getString("fullFilePath");
-        key = getActivity().getIntent().getExtras().getByteArray("KEY");
+        fullFilePath = getActivity().getIntent().getStringExtra("fullFilePath");
+        key = getActivity().getIntent().getByteArrayExtra("KEY");
 
         recyclerView = view.findViewById(R.id.recycler_view);
 
@@ -55,6 +55,7 @@ public class NotesPageFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
+        Log.d("NotesPage", "onCreateView!" + fullFilePath);
         return view;
     }
 

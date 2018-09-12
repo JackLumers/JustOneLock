@@ -150,5 +150,4 @@ public class VaultCreatingActivity extends AppCompatActivity implements View.OnC
         finish();
 
     }
-
 }

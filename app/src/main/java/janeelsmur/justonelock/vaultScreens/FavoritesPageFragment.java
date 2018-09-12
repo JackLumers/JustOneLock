@@ -62,9 +62,10 @@ public class FavoritesPageFragment extends Fragment {
         passwordsAdapter = new PasswordAdapter(passwordsWithoutFolder, fullFilePath, key);
         passwordsInFoldersAdapter = new PasswordAdapter(passwordsInFolder, fullFilePath, key);
 
-        Log.w("FavoritesPage", "onStart: onCreateView сработал ");
         passwordsRecycleView.setAdapter(passwordsAdapter);
         passwordsInFolderRecycleView.setAdapter(passwordsInFoldersAdapter);
+
+        Log.d("FavoritesPage", "onViewCreated! " + fullFilePath);
     }
 
     @Override
@@ -91,6 +92,7 @@ public class FavoritesPageFragment extends Fragment {
 
 
     private void loadFavoritesPasswords() {
+        Log.d("FavoritesPage", "LoadingPasswords " + fullFilePath);
 
         String whereClause = "isFavorite = ? AND isRemoved = ?";
         String[] whereArgs = new String[]{"1", "0"};

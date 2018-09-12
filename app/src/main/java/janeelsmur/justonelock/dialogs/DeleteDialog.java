@@ -95,7 +95,6 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
                 fullFilePath = getArguments().getString("fullFilePath");
                 systemFolderName = getArguments().getString("systemFolderName");
                 passwordId = getArguments().getInt("passwordId");
-                Log.i("DialogDelete","данные об удалении прошли "+fullFilePath);
                 break;
 
             case OBJECT_NOTE:

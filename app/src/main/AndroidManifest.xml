@@ -12,13 +12,11 @@
         android:roundIcon="@mipmap/icon"
         android:allowClearUserData="true"
         android:stateNotNeeded="true"
-        android:configChanges="keyboardHidden|orientation|screenSize"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <!-- Активность экрана приветствия -->
-        <activity android:name=".WelcomeScreenActivity"
-                  android:configChanges="keyboardHidden|orientation|screenSize">
+        <activity android:name=".WelcomeScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -83,7 +81,6 @@
 
         <!-- Главная активность выбора хранилища -->
         <activity
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:name=".MainActivity">
         </activity>
