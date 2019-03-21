@@ -13,15 +13,6 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- *
- * ЭТО КЛАСС С АЛГОРИТМАМИ ШИФРОВАНИЯ.
- * ВСЕ ИЗМЕНЕНИЯ В СИСИТЕМЕ ШИФРОВАНИЯ ДОЛЖНЫ БЫТЬ ПОДДТВЕРЖДЕНЫ ГЛАВНЫМ РАЗРАБОТЧИКОМ.
- *
- * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- **/
-
 public class FileAlgorithms {
 
     private static final String LOG_TAG = "Encryption Logs";
