@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,23 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import janeelsmur.justonelock.CreatePasswordActivity;
-import janeelsmur.justonelock.NoteActivity;
 import janeelsmur.justonelock.PasswordActivity;
 import janeelsmur.justonelock.R;
 import janeelsmur.justonelock.dialogs.DeleteDialog;
-import janeelsmur.justonelock.objects.Note;
 import janeelsmur.justonelock.objects.Password;
-import janeelsmur.justonelock.objects.PasswordFragment;
-import janeelsmur.justonelock.utilites.DBTableHelper;
-import janeelsmur.justonelock.utilites.FileAlgorithms;
+import janeelsmur.justonelock.utilities.DBTableHelper;
+import janeelsmur.justonelock.utilities.EncryptionAlgorithms;
 
 /**
  * Created by Ильназ on 20.02.2018.
@@ -172,14 +166,14 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.MyView
 
             switch (object) {
                 case 0:
-                    String password = FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_LOGIN)), key);
+                    String password = EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_LOGIN)), key);
                     clipboardManager.setPrimaryClip(ClipData.newPlainText("password", password));
                     cursor.close();
                     database.close();
                     break;
 
                 case 1:
-                    String login = FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_PASSWORD)), key);
+                    String login = EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_PASSWORD)), key);
                     clipboardManager.setPrimaryClip(ClipData.newPlainText("login", login));
                     cursor.close();
                     database.close();

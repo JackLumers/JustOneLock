@@ -1,24 +1,22 @@
 package janeelsmur.justonelock;
 
 import android.content.ContentValues;
-import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import janeelsmur.justonelock.dialogs.DeleteDialog;
-import janeelsmur.justonelock.utilites.DBTableHelper;
-import janeelsmur.justonelock.utilites.FileAlgorithms;
-import janeelsmur.justonelock.utilites.NotificationListener;
+import janeelsmur.justonelock.utilities.DBTableHelper;
+import janeelsmur.justonelock.utilities.EncryptionAlgorithms;
+import janeelsmur.justonelock.listeners.FragmentsMassagesListener;
 
-public class NoteActivity extends AppCompatActivity implements View.OnClickListener, NotificationListener {
+public class NoteActivity extends AppCompatActivity implements View.OnClickListener, FragmentsMassagesListener {
     //Сохраненное значение
     private String fullFilePath;
     private byte[] key;
@@ -63,7 +61,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
 
             cursor.close();
             database.close();
-            noteText.setText(FileAlgorithms.DecryptInString(encryptedText, key));
+            noteText.setText(EncryptionAlgorithms.DecryptInString(encryptedText, key));
         }
 
         //Установка слушателей для кнопок
@@ -91,7 +89,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         SQLiteDatabase database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
 
         //Зашифрованный текст
-        byte[] encryptedText = FileAlgorithms.Encrypt(noteText.getText().toString().getBytes(), key);
+        byte[] encryptedText = EncryptionAlgorithms.Encrypt(noteText.getText().toString().getBytes(), key);
 
         ContentValues cv = new ContentValues();
         cv.put(DBTableHelper.NOTE_TEXT, encryptedText);
@@ -108,7 +106,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         Cursor cursor = database.query(DBTableHelper.NOTES_TABLE, null, DBTableHelper.KEY_ID + " = ?", new String[]{String.valueOf(noteId)}, null, null, null);
         cursor.moveToFirst();
 
-        byte[] encryptedText = FileAlgorithms.Encrypt(noteText.getText().toString().getBytes(), key);
+        byte[] encryptedText = EncryptionAlgorithms.Encrypt(noteText.getText().toString().getBytes(), key);
 
         ContentValues cv = new ContentValues();
         cv.put(DBTableHelper.KEY_ID, noteId);
@@ -134,7 +132,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onNotificationTaken(int notification) {
         switch (notification){
-            case NotificationListener.FINISH:
+            case FragmentsMassagesListener.FINISH:
                 finish();
                 break;
         }

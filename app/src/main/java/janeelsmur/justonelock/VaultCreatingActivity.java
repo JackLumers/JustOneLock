@@ -2,7 +2,6 @@ package janeelsmur.justonelock;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,8 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rengwuxian.materialedittext.validation.RegexpValidator;
-import janeelsmur.justonelock.utilites.DBTableHelper;
-import janeelsmur.justonelock.utilites.FileAlgorithms;
+import janeelsmur.justonelock.utilities.DBTableHelper;
+import janeelsmur.justonelock.utilities.EncryptionAlgorithms;
 
 import java.io.File;
 
@@ -121,13 +120,13 @@ public class VaultCreatingActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         v.setOnClickListener(null); //Для предотвращения повторного нажатия
 
-        key = FileAlgorithms.SHA256(keyEditText.getText().toString()); //Ключ
+        key = EncryptionAlgorithms.SHA256(keyEditText.getText().toString()); //Ключ
 
         //Создание базы данных
         SQLiteDatabase database = openOrCreateDatabase(fullFilePath, MODE_PRIVATE, null);
         database.enableWriteAheadLogging();
         //Создание таблицы с контрольной строкой
-        byte[] encryptedSum = FileAlgorithms.Encrypt(DBTableHelper.CHECK_SUM_TEXT.getBytes(), key);
+        byte[] encryptedSum = EncryptionAlgorithms.Encrypt(DBTableHelper.CHECK_SUM_TEXT.getBytes(), key);
         ContentValues cv = new ContentValues();
         cv.put(DBTableHelper.CHECK_SUM_FIELD, encryptedSum);
 

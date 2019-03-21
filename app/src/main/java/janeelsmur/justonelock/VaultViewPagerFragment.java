@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import janeelsmur.justonelock.adapters.PagerAdapter;
-import janeelsmur.justonelock.utilites.NotificationListener;
+import janeelsmur.justonelock.listeners.FragmentsMassagesListener;
 import janeelsmur.justonelock.vaultScreens.FavoritesPageFragment;
 import janeelsmur.justonelock.vaultScreens.NotesPageFragment;
 import janeelsmur.justonelock.vaultScreens.PasswordsPageFragment;
@@ -24,14 +24,14 @@ public class VaultViewPagerFragment extends Fragment {
     private final Fragment[] pages = {favoritesPageFragment, passwordsPageFragment, notesPageFragment};
 
     //Интерфейс для посыла сообщения для активности, чтобы та закрыла floating action button
-    private NotificationListener notificationListener;
+    private FragmentsMassagesListener fragmentsMassagesListener;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.vault_view_pager, null);
         //Инициализация интерфейса
-        notificationListener = (NotificationListener) getActivity();
+        fragmentsMassagesListener = (FragmentsMassagesListener) getActivity();
         //Инициализация PagerAdapter'а
         PagerAdapter pagerAdapter = new PagerAdapter(getChildFragmentManager(), pages);
         ViewPager viewPager = view.findViewById(R.id.viewpager);
@@ -53,7 +53,7 @@ public class VaultViewPagerFragment extends Fragment {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 //Закрытие фаба в активности
-                notificationListener.onNotificationTaken(NotificationListener.CLOSE_FAB);
+                fragmentsMassagesListener.onNotificationTaken(FragmentsMassagesListener.CLOSE_FAB);
             }
 
             @Override

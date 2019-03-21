@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\kailn\_Projects\JustOneLock\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="7b436b9c88892e0443e530bf772caff4ba7cbe7b">
+        <dex dex="C:\Users\kailn\_Projects\JustOneLock\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_2046af0d9ffeae88e6eeda1482cbdf7381c57d45\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kailn\_Projects\JustOneLock\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="c323c36ecc68965c4cfb460f7721113d2b61ed03">
+        <dex dex="C:\Users\kailn\_Projects\JustOneLock\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_f9aae3956874c8d2cf866d6bb84a39f0a02664be\classes.dex" />
+    </item>
+
+</items>

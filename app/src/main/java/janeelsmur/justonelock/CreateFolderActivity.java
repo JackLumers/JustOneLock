@@ -1,7 +1,6 @@
 package janeelsmur.justonelock;
 
 import android.content.ContentValues;
-import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import janeelsmur.justonelock.utilites.DBTableHelper;
+import janeelsmur.justonelock.utilities.DBTableHelper;
 
 public class CreateFolderActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher{
 

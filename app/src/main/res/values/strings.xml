@@ -54,7 +54,9 @@
     <string name="delete_password">Удалить запись?</string>
     <string name="decline">Отмена</string>
     <string name="ok">Ок</string>
-    <string name="delete_folder">Вы действительно хотите удалить эту папку? Вместе с ней удаляться и вложенные записи.</string>
+    <string name="delete_folder_text">Вы действительно хотите удалить эту папку? Вместе с ней удаляться и вложенные записи.</string>
+    <string name="delete_note_text">Вы действительно хотите удалить эту заметку?</string>
+    <string name="delete_entry_text">Вы действительно хотите удалить эту запись?</string>
 
     <string name="text_for_empty_entries_screen">Записей пока нет. \n Создайте новую запись или папку, \n нажав на кнопку в правом нижнем углу! :) </string>
     <string name="not_grouped">Несгруппированные</string>

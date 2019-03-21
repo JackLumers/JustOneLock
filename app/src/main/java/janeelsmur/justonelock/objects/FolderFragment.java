@@ -13,7 +13,7 @@ import android.widget.TextView;
 import janeelsmur.justonelock.FolderActivity;
 import janeelsmur.justonelock.R;
 import janeelsmur.justonelock.dialogs.DeleteDialog;
-import janeelsmur.justonelock.utilites.DBTableHelper;
+import janeelsmur.justonelock.utilities.DBTableHelper;
 
 public class FolderFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener{
 

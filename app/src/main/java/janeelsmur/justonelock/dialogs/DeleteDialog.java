@@ -1,20 +1,16 @@
 package janeelsmur.justonelock.dialogs;
 
-import android.app.Activity;
-import android.content.Context;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import janeelsmur.justonelock.R;
-import janeelsmur.justonelock.utilites.DBTableHelper;
-import janeelsmur.justonelock.utilites.NotificationListener;
+import janeelsmur.justonelock.listeners.FragmentsMassagesListener;
+import janeelsmur.justonelock.utilities.DBTableHelper;
 
 public class DeleteDialog extends DialogFragment implements View.OnClickListener {
 
@@ -27,10 +23,10 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
     private String systemFolderName;
     private int folderId;
     private String fullFilePath;
-    private int object;
+    private int objectType;
     private boolean isCalledFromActivity;
 
-    private NotificationListener notificationListener;
+    private FragmentsMassagesListener fragmentsMassagesListener;
 
     /** Для удаления пароля */
     public static DeleteDialog newInstance(int object, String fullFilePath, String systemFolderName, int passwordId, boolean isCalledFromActivity) {
@@ -40,7 +36,7 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
         args.putString("fullFilePath", fullFilePath);
         args.putString("systemFolderName", systemFolderName);
         args.putInt("passwordId", passwordId);
-        args.putInt("object", object);
+        args.putInt("objectType", object);
 
         DeleteDialog fragment = new DeleteDialog();
         fragment.setArguments(args);
@@ -54,7 +50,7 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
         args.putBoolean("isCalledFromActivity", isCalledFromActivity);
         args.putString("fullFilePath", fullFilePath);
         args.putInt("folderId", folderId);
-        args.putInt("object", object);
+        args.putInt("objectType", object);
 
         DeleteDialog fragment = new DeleteDialog();
         fragment.setArguments(args);
@@ -68,7 +64,7 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
         args.putBoolean("isCalledFromActivity", isCalledFromActivity);
         args.putString("fullFilePath", fullFilePath);
         args.putInt("noteId", noteId);
-        args.putInt("object", object);
+        args.putInt("objectType", object);
 
         DeleteDialog fragment = new DeleteDialog();
         fragment.setArguments(args);
@@ -80,12 +76,12 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setStyle(STYLE_NO_TITLE, 0);
 
-        object = getArguments().getInt("object");
+        objectType = getArguments().getInt("objectType");
         isCalledFromActivity = getArguments().getBoolean("isCalledFromActivity");
 
-        notificationListener = (NotificationListener) getActivity();
+        fragmentsMassagesListener = (FragmentsMassagesListener) getActivity();
 
-        switch (object){
+        switch (objectType){
             case OBJECT_FOLDER:
                 folderId = getArguments().getInt("folderId");
                 fullFilePath = getArguments().getString("fullFilePath");
@@ -112,7 +108,9 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
         TextView declineButton = view.findViewById(R.id.declineButton);
         TextView okButton = view.findViewById(R.id.okButton);
 
-        if(object == OBJECT_FOLDER) text.setText(R.string.delete_folder);
+        if(objectType == OBJECT_NOTE) text.setText(R.string.delete_note_text);
+        if(objectType == OBJECT_PASSWORD) text.setText(R.string.delete_password);
+        if(objectType == OBJECT_FOLDER) text.setText(R.string.delete_folder_text);
 
         declineButton.setOnClickListener(this);
         okButton.setOnClickListener(this);
@@ -129,30 +127,30 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
                     break;
 
                 case R.id.okButton:
-                    if (object == OBJECT_PASSWORD) {
+                    if (objectType == OBJECT_PASSWORD) {
                         SQLiteDatabase database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
                         DBTableHelper.markPasswordDeleted(database, systemFolderName, passwordId, 1);
                         database.close();
                         if (isCalledFromActivity) { //Если папка удаляется из активности самой папки, то активность финишировать
-                            notificationListener.onNotificationTaken(NotificationListener.FINISH);
+                            fragmentsMassagesListener.onNotificationTaken(FragmentsMassagesListener.FINISH);
                         }
                         else { //Иначе обновить объекты вью
-                            notificationListener.onNotificationTaken(NotificationListener.DATA_CHANGED);
+                            fragmentsMassagesListener.onNotificationTaken(FragmentsMassagesListener.DATA_CHANGED);
                             dismiss();
                         }
-                    } else if (object == OBJECT_FOLDER) {
+                    } else if (objectType == OBJECT_FOLDER) {
                         SQLiteDatabase database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
                         DBTableHelper.markFolderDeleted(database, folderId, 1);
                         database.close();
-                        if (isCalledFromActivity) notificationListener.onNotificationTaken(NotificationListener.FINISH);
-                        else notificationListener.onNotificationTaken(NotificationListener.DATA_CHANGED);
+                        if (isCalledFromActivity) fragmentsMassagesListener.onNotificationTaken(FragmentsMassagesListener.FINISH);
+                        else fragmentsMassagesListener.onNotificationTaken(FragmentsMassagesListener.DATA_CHANGED);
                         dismiss();
-                    } else if (object == OBJECT_NOTE) {
+                    } else if (objectType == OBJECT_NOTE) {
                         SQLiteDatabase database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
                         DBTableHelper.markNoteDeleted(database, noteId, 1);
                         database.close();
-                        if (isCalledFromActivity) notificationListener.onNotificationTaken(NotificationListener.FINISH);
-                        else notificationListener.onNotificationTaken(NotificationListener.DATA_CHANGED);
+                        if (isCalledFromActivity) fragmentsMassagesListener.onNotificationTaken(FragmentsMassagesListener.FINISH);
+                        else fragmentsMassagesListener.onNotificationTaken(FragmentsMassagesListener.DATA_CHANGED);
                         dismiss();
                     }
             }

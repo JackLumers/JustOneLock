@@ -1,7 +1,6 @@
 package janeelsmur.justonelock;
 
 import android.content.ContentValues;
-import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +13,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import janeelsmur.justonelock.utilites.DBTableHelper;
-import janeelsmur.justonelock.utilites.FileAlgorithms;
+import janeelsmur.justonelock.utilities.DBTableHelper;
+import janeelsmur.justonelock.utilities.EncryptionAlgorithms;
 
 public class CreatePasswordActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
@@ -104,9 +103,9 @@ public class CreatePasswordActivity extends AppCompatActivity implements View.On
         SQLiteDatabase database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
 
         //Зашифрованные логин и пароль
-        byte[] encryptedService = FileAlgorithms.Encrypt(titleEditText.getText().toString().getBytes(), key);
-        byte[] encryptedLogin = FileAlgorithms.Encrypt(loginEditText.getText().toString().getBytes(), key);
-        byte[] encryptedPassword = FileAlgorithms.Encrypt(passwordEditText.getText().toString().getBytes(), key);
+        byte[] encryptedService = EncryptionAlgorithms.Encrypt(titleEditText.getText().toString().getBytes(), key);
+        byte[] encryptedLogin = EncryptionAlgorithms.Encrypt(loginEditText.getText().toString().getBytes(), key);
+        byte[] encryptedPassword = EncryptionAlgorithms.Encrypt(passwordEditText.getText().toString().getBytes(), key);
 
         //Составление строки
         ContentValues cv = new ContentValues();
@@ -129,9 +128,9 @@ public class CreatePasswordActivity extends AppCompatActivity implements View.On
         SQLiteDatabase database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
 
         //Зашифрованные логин и пароль
-        byte[] encryptedService = FileAlgorithms.Encrypt(titleEditText.getText().toString().getBytes(), key);
-        byte[] encryptedLogin = FileAlgorithms.Encrypt(loginEditText.getText().toString().getBytes(), key);
-        byte[] encryptedPassword = FileAlgorithms.Encrypt(passwordEditText.getText().toString().getBytes(), key);
+        byte[] encryptedService = EncryptionAlgorithms.Encrypt(titleEditText.getText().toString().getBytes(), key);
+        byte[] encryptedLogin = EncryptionAlgorithms.Encrypt(loginEditText.getText().toString().getBytes(), key);
+        byte[] encryptedPassword = EncryptionAlgorithms.Encrypt(passwordEditText.getText().toString().getBytes(), key);
 
         //Составление строки
         ContentValues cv = new ContentValues();

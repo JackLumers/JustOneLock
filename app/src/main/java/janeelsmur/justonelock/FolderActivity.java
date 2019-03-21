@@ -15,14 +15,14 @@ import android.view.View;
 
 import janeelsmur.justonelock.adapters.PasswordAdapter;
 import janeelsmur.justonelock.dialogs.DeleteDialog;
+import janeelsmur.justonelock.listeners.FragmentsMassagesListener;
 import janeelsmur.justonelock.objects.Password;
-import janeelsmur.justonelock.utilites.DBTableHelper;
-import janeelsmur.justonelock.utilites.FileAlgorithms;
-import janeelsmur.justonelock.utilites.NotificationListener;
+import janeelsmur.justonelock.utilities.DBTableHelper;
+import janeelsmur.justonelock.utilities.EncryptionAlgorithms;
 
 import java.util.ArrayList;
 
-public class FolderActivity extends AppCompatActivity implements View.OnClickListener, NotificationListener {
+public class FolderActivity extends AppCompatActivity implements View.OnClickListener, FragmentsMassagesListener {
 
     private final String TAG = "FolderActivity";
     private final int ADD_PASS_AFTER_CREATING = 1;
@@ -37,7 +37,6 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
     private RecyclerView passwordsRecycleView;
     private PasswordAdapter Adapter;
 
-    private SQLiteDatabase database;
     private ArrayList<Password> passwordFragments = new ArrayList<>();
 
     private Menu globalMenu; // Будет нужно в будущем для динамического обновления кнопок на тулбаре
@@ -94,11 +93,11 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onNotificationTaken(int notification) {
         switch (notification) {
-            case NotificationListener.FINISH:
+            case FragmentsMassagesListener.FINISH:
                 finish();
                 break;
 
-            case NotificationListener.DATA_CHANGED:
+            case FragmentsMassagesListener.DATA_CHANGED:
                 passwordFragments.clear();
                 reloadPasswordsFromDatabase();
                 Adapter.notifyDataSetChanged();
@@ -125,10 +124,10 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
 
 
     private void reloadPasswordsFromDatabase() {
-        //Обнуляем
+        //Очищаем список
         passwordFragments.clear();
 
-        database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
+        SQLiteDatabase database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
 
         String whereClause = "isRemoved = ?";
         String[] whereArgs = {"0"};
@@ -137,14 +136,14 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
 
         if (cursor.moveToFirst()) {
 
-            String title = FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key);
+            String title = EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key);
             String description = cursor.getString(cursor.getColumnIndex(DBTableHelper.PASS_DESCRIPTION));
             int passwordId = cursor.getInt(cursor.getColumnIndex(DBTableHelper.KEY_ID));
 
             passwordFragments.add(new Password(title, description, 0, passwordId, fullFilePath, systemFolderName));
             while (cursor.moveToNext()) {
 
-                title = (FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key));
+                title = (EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key));
                 description = cursor.getString(cursor.getColumnIndex(DBTableHelper.PASS_DESCRIPTION));
                 passwordId = cursor.getInt(cursor.getColumnIndex(DBTableHelper.KEY_ID));
 

@@ -16,8 +16,8 @@ import janeelsmur.justonelock.adapters.FolderAdapter;
 import janeelsmur.justonelock.adapters.PasswordAdapter;
 import janeelsmur.justonelock.objects.Folder;
 import janeelsmur.justonelock.objects.Password;
-import janeelsmur.justonelock.utilites.DBTableHelper;
-import janeelsmur.justonelock.utilites.FileAlgorithms;
+import janeelsmur.justonelock.utilities.DBTableHelper;
+import janeelsmur.justonelock.utilities.EncryptionAlgorithms;
 
 import java.util.ArrayList;
 
@@ -119,8 +119,6 @@ public class PasswordsPageFragment extends Fragment {
         else foldersText.setVisibility(View.GONE);
         if (passwordFragments.size() != 0) groupedText.setVisibility(View.VISIBLE);
         else groupedText.setVisibility(View.GONE);
-
-
     }
 
 
@@ -158,14 +156,14 @@ public class PasswordsPageFragment extends Fragment {
 
         if (cursor.moveToFirst()) {
 
-            String title = FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key);
+            String title = EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key);
             String description = cursor.getString(cursor.getColumnIndex(DBTableHelper.PASS_DESCRIPTION));
             int passwordId = cursor.getInt(cursor.getColumnIndex(DBTableHelper.KEY_ID));
 
             passwordFragments.add(new Password(title, description, 0, passwordId, fullFilePath, DBTableHelper.TABLE_PASSWORDS_WITHOUT_FOLDER));
 
             while (cursor.moveToNext()) {
-                title = FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key);
+                title = EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key);
                 description = cursor.getString(cursor.getColumnIndex(DBTableHelper.PASS_DESCRIPTION));
                 passwordId = cursor.getInt(cursor.getColumnIndex(DBTableHelper.KEY_ID));
                 passwordFragments.add(new Password(title, description, 0, passwordId, fullFilePath, DBTableHelper.TABLE_PASSWORDS_WITHOUT_FOLDER));

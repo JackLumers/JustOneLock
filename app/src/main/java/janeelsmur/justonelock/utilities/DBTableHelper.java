@@ -1,4 +1,4 @@
-package janeelsmur.justonelock.utilites;
+package janeelsmur.justonelock.utilities;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;

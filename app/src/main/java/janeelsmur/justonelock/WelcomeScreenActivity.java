@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import janeelsmur.justonelock.adapters.PagerAdapter;
-import janeelsmur.justonelock.utilites.SharedPreferencesManager;
+import janeelsmur.justonelock.utilities.SharedPreferencesManager;
 import janeelsmur.justonelock.welcomeScreens.WelcomeScreen1Fragment;
 import janeelsmur.justonelock.welcomeScreens.WelcomeScreen2Fragment;
 import janeelsmur.justonelock.welcomeScreens.WelcomeScreen3Fragment;

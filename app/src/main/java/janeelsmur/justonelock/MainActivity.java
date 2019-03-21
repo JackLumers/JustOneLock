@@ -17,14 +17,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import janeelsmur.justonelock.utilites.PathUtilite;
-import janeelsmur.justonelock.utilites.SharedPreferencesManager;
+import janeelsmur.justonelock.utilities.PathUtilite;
+import janeelsmur.justonelock.utilities.SharedPreferencesManager;
 
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    // Результирующий коды //
+    // Результирующие коды //
     private static final int GET_FILE_PATH_RESULT_CODE = 5;
     private final int EXTERNAL_STORAGE_PERMISSION_CODE = 2;
     private final int FINISH_ACTIVITY_CODE = 3;

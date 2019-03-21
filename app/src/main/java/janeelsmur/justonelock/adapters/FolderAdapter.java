@@ -17,7 +17,7 @@ import janeelsmur.justonelock.FolderActivity;
 import janeelsmur.justonelock.R;
 import janeelsmur.justonelock.dialogs.DeleteDialog;
 import janeelsmur.justonelock.objects.Folder;
-import janeelsmur.justonelock.utilites.DBTableHelper;
+import janeelsmur.justonelock.utilities.DBTableHelper;
 
 /**
  * Created by Ильназ on 20.02.2018.

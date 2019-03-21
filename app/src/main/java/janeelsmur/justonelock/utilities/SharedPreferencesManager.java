@@ -1,7 +1,10 @@
-package janeelsmur.justonelock.utilites;
+package janeelsmur.justonelock.utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class SharedPreferencesManager {
 
@@ -27,34 +30,14 @@ public class SharedPreferencesManager {
         return sharedPreferences.getString("fullFilePath", null);
     }
 
-//
-//    /** Изменяет состояние флажка измененных избранных на true **/
-//    public void setFavoritesChanged(@Nullable Set){
-//        Set<Integer> addedId
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putBoolean("isFavoritesChanged", true);
-//        editor.commit();
-//    }
-//
-//    /** Устанавливает флажек измененных избранных на false **/
-//    public void setFavoritesChangesCommited(){
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.remove("isFavoritesChanged");
-//    }
-//
-//    /** Проверяет, изменены ли избранные **/
-//    public boolean isFavoritesChanged(){
-//        return sharedPreferences.getBoolean("isFavoritesChanged", false);
-//    }
-
     public void disableWelcomeScreen() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("isFirstAppLaunch", false);
         editor.commit();
     }
 
-
     public boolean isFirstAppLaunch(){
         return sharedPreferences.getBoolean("isFirstAppLaunch", true);
     }
+
 }

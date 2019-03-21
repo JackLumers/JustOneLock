@@ -16,8 +16,8 @@ import android.widget.RelativeLayout;
 import janeelsmur.justonelock.R;
 import janeelsmur.justonelock.adapters.PasswordAdapter;
 import janeelsmur.justonelock.objects.Password;
-import janeelsmur.justonelock.utilites.DBTableHelper;
-import janeelsmur.justonelock.utilites.FileAlgorithms;
+import janeelsmur.justonelock.utilities.DBTableHelper;
+import janeelsmur.justonelock.utilities.EncryptionAlgorithms;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -28,7 +28,6 @@ public class FavoritesPageFragment extends Fragment {
     private String fullFilePath;
     private byte[] key;
 
-    private SQLiteDatabase database;
     private PasswordAdapter passwordsAdapter, passwordsInFoldersAdapter;
     //Для обновления фрагментов
     private ArrayList<Password> passwordsInFolder = new ArrayList<>();
@@ -97,12 +96,12 @@ public class FavoritesPageFragment extends Fragment {
         String whereClause = "isFavorite = ? AND isRemoved = ?";
         String[] whereArgs = new String[]{"1", "0"};
 
-        database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
+        SQLiteDatabase database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
         Cursor cursor = database.query(DBTableHelper.TABLE_PASSWORDS_WITHOUT_FOLDER, null, whereClause, whereArgs, null, null, null);
 
         if (cursor.moveToFirst()) {
 
-            String title = FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key);
+            String title = EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key);
             String description = cursor.getString(cursor.getColumnIndex(DBTableHelper.PASS_DESCRIPTION));
             int passwordId = cursor.getInt(cursor.getColumnIndex(DBTableHelper.KEY_ID));
 
@@ -110,7 +109,7 @@ public class FavoritesPageFragment extends Fragment {
 
 
             while (cursor.moveToNext()) {
-                title = FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key);
+                title = EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key);
                 description = cursor.getString(cursor.getColumnIndex(DBTableHelper.PASS_DESCRIPTION));
                 passwordId = cursor.getInt(cursor.getColumnIndex(DBTableHelper.KEY_ID));
                 passwordsWithoutFolder.add(new Password(title, description, 0, passwordId, fullFilePath, DBTableHelper.TABLE_PASSWORDS_WITHOUT_FOLDER));
@@ -123,7 +122,7 @@ public class FavoritesPageFragment extends Fragment {
     }
 
     private void loadFavoritePasswordsFromFolders() {
-        database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
+        SQLiteDatabase database = SQLiteDatabase.openDatabase(fullFilePath, null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING);
 
         //Получаем массив с id всех папок
         String whereClause = "isRemoved = ?";
@@ -148,7 +147,7 @@ public class FavoritesPageFragment extends Fragment {
             cursor = database.query(systemFolderName, null, whereClause, whereArgs, null, null, null);
 
             if (cursor.moveToFirst()) {
-                String title = (FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key));
+                String title = (EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key));
                 String description = cursor.getString(cursor.getColumnIndex(DBTableHelper.PASS_DESCRIPTION));
                 int passwordId = cursor.getInt(cursor.getColumnIndex(DBTableHelper.KEY_ID));
 
@@ -156,7 +155,7 @@ public class FavoritesPageFragment extends Fragment {
 
                 while (cursor.moveToNext()) { //Пока есть строки с паролями, перебираем эти строки
 
-                    title = (FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key));
+                    title = (EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_SERVICE)), key));
                     description = cursor.getString(cursor.getColumnIndex(DBTableHelper.PASS_DESCRIPTION));
                     passwordId = cursor.getInt(cursor.getColumnIndex(DBTableHelper.KEY_ID));
 

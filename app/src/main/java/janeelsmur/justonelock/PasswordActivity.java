@@ -17,11 +17,11 @@ import android.support.v7.widget.Toolbar;
 import android.widget.*;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import janeelsmur.justonelock.dialogs.DeleteDialog;
-import janeelsmur.justonelock.utilites.DBTableHelper;
-import janeelsmur.justonelock.utilites.FileAlgorithms;
-import janeelsmur.justonelock.utilites.NotificationListener;
+import janeelsmur.justonelock.listeners.FragmentsMassagesListener;
+import janeelsmur.justonelock.utilities.DBTableHelper;
+import janeelsmur.justonelock.utilities.EncryptionAlgorithms;
 
-public class PasswordActivity extends AppCompatActivity implements View.OnClickListener, NotificationListener, CompoundButton.OnCheckedChangeListener{
+public class PasswordActivity extends AppCompatActivity implements View.OnClickListener, FragmentsMassagesListener, CompoundButton.OnCheckedChangeListener{
 
     private final int EDITING_MODE = 1;
     private final int WATCHING_MODE = 0;
@@ -184,7 +184,7 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onNotificationTaken(int notification) {
         switch (notification) {
-            case NotificationListener.FINISH:
+            case FragmentsMassagesListener.FINISH:
                 finish();
                 break;
         }
@@ -228,8 +228,8 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
         cursor.moveToFirst();
 
         if (cursor.getInt(cursor.getColumnIndex(DBTableHelper.PASS_IS_FAVORITE)) == 1) inFavorites.setChecked(true);
-        loginTextView.setText(FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_LOGIN)), key));
-        passwordTextView.setText(FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_PASSWORD)), key));
+        loginTextView.setText(EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_LOGIN)), key));
+        passwordTextView.setText(EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_PASSWORD)), key));
         descriptionTextView.setText(cursor.getString(cursor.getColumnIndex(DBTableHelper.PASS_DESCRIPTION)));
 
         cursor.close();
@@ -299,9 +299,9 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
         cv.put(DBTableHelper.PASS_IS_REMOVED, false);
 
         //Зашифрованные логин и пароль
-        byte[] encryptedService = FileAlgorithms.Encrypt(titleInEditMode.getText().toString().getBytes(), key);
-        byte[] encryptedLogin = FileAlgorithms.Encrypt(loginTextView.getText().toString().getBytes(), key);
-        byte[] encryptedPassword = FileAlgorithms.Encrypt(passwordTextView.getText().toString().getBytes(), key);
+        byte[] encryptedService = EncryptionAlgorithms.Encrypt(titleInEditMode.getText().toString().getBytes(), key);
+        byte[] encryptedLogin = EncryptionAlgorithms.Encrypt(loginTextView.getText().toString().getBytes(), key);
+        byte[] encryptedPassword = EncryptionAlgorithms.Encrypt(passwordTextView.getText().toString().getBytes(), key);
         cv.put(DBTableHelper.PASS_SERVICE, encryptedService);
         cv.put(DBTableHelper.PASS_LOGIN, encryptedLogin);
         cv.put(DBTableHelper.PASS_PASSWORD, encryptedPassword);

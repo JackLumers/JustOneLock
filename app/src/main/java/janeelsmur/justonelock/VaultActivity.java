@@ -1,13 +1,11 @@
 package janeelsmur.justonelock;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,12 +20,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import janeelsmur.justonelock.utilites.NotificationListener;
-import janeelsmur.justonelock.utilites.SharedPreferencesManager;
+import janeelsmur.justonelock.listeners.FragmentsMassagesListener;
+import janeelsmur.justonelock.utilities.SharedPreferencesManager;
 
 public class VaultActivity
         extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, NotificationListener, View.OnTouchListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, FragmentsMassagesListener, View.OnTouchListener {
 
     private long back_pressed; // Таймер нажатия "назад"
 
@@ -227,20 +225,15 @@ public class VaultActivity
         return true;
     }
 
-    /** Принимает сообщения от фрагментов, диалогов и т.д. внутри данной активности.
-     *
-     * @param notification - сообщение
-     *                     DATA_CHANGED - уведомить ViewPager, что данные нужно обновить.
-     *                     CLOSE_FAB - уведомляет, что нужно закрыть фабы.
-     */
+    // FragmentsMassagesListener
     @Override
     public void onNotificationTaken(int notification) {
         switch (notification){
-            case NotificationListener.CLOSE_FAB:
+            case FragmentsMassagesListener.CLOSE_FAB:
                 hideFabs();
                 break;
 
-            case NotificationListener.DATA_CHANGED:
+            case FragmentsMassagesListener.DATA_CHANGED:
                 vaultViewPagerFragment.notifyDataHasChanged();
                 break;
 

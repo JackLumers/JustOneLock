@@ -2,7 +2,6 @@ package janeelsmur.justonelock;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Vibrator;
@@ -11,13 +10,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import janeelsmur.justonelock.utilites.DBTableHelper;
-import janeelsmur.justonelock.utilites.FileAlgorithms;
-import janeelsmur.justonelock.utilites.SharedPreferencesManager;
+import janeelsmur.justonelock.utilities.DBTableHelper;
+import janeelsmur.justonelock.utilities.EncryptionAlgorithms;
+import janeelsmur.justonelock.utilities.SharedPreferencesManager;
 
 public class EnteringActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -70,7 +68,7 @@ public class EnteringActivity extends AppCompatActivity implements View.OnClickL
             //Ввод ключа
             case R.id.enter_button:
                 String enteredKey = masterKey.getText().toString();
-                key = FileAlgorithms.SHA256(enteredKey);
+                key = EncryptionAlgorithms.SHA256(enteredKey);
                 if (isCorrectKey(key, fullFilePath)) {
                     keyboard.hideSoftInputFromWindow(enterButton.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS); //Убираем клавиатуру
 
@@ -123,7 +121,7 @@ public class EnteringActivity extends AppCompatActivity implements View.OnClickL
         byte[] checkSum = cursor.getBlob(cursor.getColumnIndex(DBTableHelper.CHECK_SUM_FIELD));
         cursor.close(); database.close();
 
-        return FileAlgorithms.DecryptInString(checkSum, key) != null && FileAlgorithms.DecryptInString(checkSum, key).equals(DBTableHelper.CHECK_SUM_TEXT);
+        return EncryptionAlgorithms.DecryptInString(checkSum, key) != null && EncryptionAlgorithms.DecryptInString(checkSum, key).equals(DBTableHelper.CHECK_SUM_TEXT);
     }
 
 }

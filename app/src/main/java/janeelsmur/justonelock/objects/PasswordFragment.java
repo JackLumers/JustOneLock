@@ -15,8 +15,8 @@ import android.widget.*;
 import janeelsmur.justonelock.PasswordActivity;
 import janeelsmur.justonelock.R;
 import janeelsmur.justonelock.dialogs.DeleteDialog;
-import janeelsmur.justonelock.utilites.DBTableHelper;
-import janeelsmur.justonelock.utilites.FileAlgorithms;
+import janeelsmur.justonelock.utilities.DBTableHelper;
+import janeelsmur.justonelock.utilities.EncryptionAlgorithms;
 
 public class PasswordFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener {
 
@@ -183,14 +183,14 @@ public class PasswordFragment extends Fragment implements View.OnClickListener, 
 
         switch (object) {
             case 1:
-                String password = FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_LOGIN)), key);
+                String password = EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_LOGIN)), key);
                 clipboardManager.setPrimaryClip(ClipData.newPlainText("password", password));
                 cursor.close();
                 database.close();
                 break;
 
             case 0:
-                String login = FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_PASSWORD)), key);
+                String login = EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.PASS_PASSWORD)), key);
                 clipboardManager.setPrimaryClip(ClipData.newPlainText("login", login));
                 cursor.close();
                 database.close();

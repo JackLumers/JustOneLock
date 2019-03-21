@@ -1,4 +1,4 @@
-package janeelsmur.justonelock.utilites;
+package janeelsmur.justonelock.utilities;
 
 import android.content.ContentUris;
 import android.content.Context;

@@ -85,6 +85,8 @@
             android:name=".MainActivity">
         </activity>
 
+        <!-- Активность входа в Google Drive -->
+
     </application>
 
 </manifest>

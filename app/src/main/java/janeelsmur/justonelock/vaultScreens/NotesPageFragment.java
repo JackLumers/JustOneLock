@@ -8,14 +8,14 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.widget.RelativeLayout;
 import janeelsmur.justonelock.objects.Note;
-import janeelsmur.justonelock.utilites.DBTableHelper;
+import janeelsmur.justonelock.utilities.DBTableHelper;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import janeelsmur.justonelock.R;
-import janeelsmur.justonelock.utilites.FileAlgorithms;
+import janeelsmur.justonelock.utilities.EncryptionAlgorithms;
 import janeelsmur.justonelock.adapters.NoteAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -135,7 +135,7 @@ public class NotesPageFragment extends Fragment {
         if (cursor.moveToFirst()) {
 
             //Полный текст, включая заголовок
-            String fullText = FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.NOTE_TEXT)), key);
+            String fullText = EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.NOTE_TEXT)), key);
             //Разлинованный текст
             String[] textLines;
             StringBuilder headerBuilder = new StringBuilder();
@@ -164,7 +164,7 @@ public class NotesPageFragment extends Fragment {
 
 
             while (cursor.moveToNext()) {
-                fullText = FileAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.NOTE_TEXT)), key);
+                fullText = EncryptionAlgorithms.DecryptInString(cursor.getBlob(cursor.getColumnIndex(DBTableHelper.NOTE_TEXT)), key);
                 textBuilder = new StringBuilder();
                 headerBuilder = new StringBuilder();
                 noteId = cursor.getInt(cursor.getColumnIndex(DBTableHelper.KEY_ID));
